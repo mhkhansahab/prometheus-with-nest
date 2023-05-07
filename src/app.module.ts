@@ -1,23 +1,12 @@
 import { Module } from '@nestjs/common';
-import { OpenTelemetryModule } from '@metinseylan/nestjs-opentelemetry';
-import { PrometheusExporter } from '@opentelemetry/exporter-prometheus';
-import { MeterProvider } from '@opentelemetry/sdk-metrics';
+import { AppService } from './app.service';
+import { PromService } from './PromService';
+import { AppController } from './app.controller';
 
 @Module({
-  imports: [
-    OpenTelemetryModule.forRootAsync({
-      imports: [],
-      useFactory: async () => ({
-        serviceName: 'nestjs-opentelemetry',
-        metricExporter: new MeterProvider().addMetricReader(
-          new PrometheusExporter({
-            endpoint: 'metrics',
-            port: 9090
-          })
-        ),
-        metricInterval: 2000
-      })
-    })
-  ]
+  imports: [],
+  controllers: [AppController],
+  providers: [PromService, AppService],
 })
+
 export class AppModule {}
