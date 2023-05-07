@@ -1,34 +1,25 @@
 import { Controller, Get, Post, Delete, Put } from '@nestjs/common';
-import { AppService } from './app.service';
-import { PromService } from './PromService';
 
 @Controller()
 export class AppController {
-  constructor(
-    // private readonly appService: AppService,
-    private readonly promService: PromService
-  ) {}
-
+  
   @Post()
   setCounter() {
-    this.promService.getCount().add(1, { describe: 'Post Request' });
+    console.log('Post')
   }
 
   @Get()
   getCounter() {
-    this.promService.getCount().add(1, { describe: 'Get Request' });
-    return this.promService.getCount();
+    console.log('Get')
   }
 
   @Put()
   updateCounter() {
-    this.promService.getCount().add(1, { describe: 'Update Request' });
-    return this.promService.getCount();
+    console.log('Put')
   }
 
   @Delete()
   deleteCounter() {
-    this.promService.getCount().add(1, { describe: 'Delete Request' });
-    return this.promService.getCount();
+    console.log('Delete')
   }
 }
